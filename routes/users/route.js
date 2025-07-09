@@ -36,9 +36,10 @@ router.post("/signup", async (req, res) => {
 
     await user.save();
 
+    const token = user.generateJWT()
     res.status(201).json({
       message: "User created successfully",
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id, name: user.name, email: user.email, token, },
     });
   } catch (error) {
     console.error("Signup error:", error);
@@ -59,13 +60,14 @@ router.post("/login", async (req, res) => {
     if (!user)
       return res.status(400).json({ message: "Invalid email or password." });
 
-    const isMatch = await bcrypt.compare(password, user.password_hash);
+    const isMatch = await user.validatePassword(password)
     if (!isMatch)
       return res.status(400).json({ message: "Invalid email or password." });
 
+    const token = user.generateJWT()
     res.status(200).json({
       message: "Login successful",
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { id: user._id, name: user.name, email: user.email, token, },
     });
   } catch (error) {
     console.error("Login error:", error);
