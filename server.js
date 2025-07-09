@@ -3,7 +3,6 @@ import express from "express";
 import userRoutes from "./routes/users/route.js";
 import userDetailRoutes from "./routes/users/[id]/route.js"
 
-
 const app = express();
 app.use(express.json());
 connectDB();
