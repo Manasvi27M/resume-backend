@@ -1,5 +1,4 @@
 import express from "express";
-import connectDB from "../../lib/mongodb.js";
 import Resume from "../../models/resume.js";
 
 const router = express.Router();
@@ -72,7 +71,7 @@ router.post("/", async (req, res) => {
     const defaultSectionsOrder = [
       "basic",
       "education",
-      "experience",
+      "technicalExperience",
       "skills",
       "projects",
       "certificates",

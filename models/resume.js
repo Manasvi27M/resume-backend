@@ -93,7 +93,7 @@ const resumeSchema = new mongoose.Schema(
         enum: [
           "basic",
           "education",
-          "experience",
+          "technicalExperience",
           "skills",
           "projects",
           "certificates",
