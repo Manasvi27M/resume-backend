@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   password_hash: { type: String, required: true },
   phone: { type: String, unique: true },
   created_at: { type: Date, default: Date.now },
+  preferences: { type: Array, default: [] },
 });
 
 export default mongoose.model("Users", UserSchema);
