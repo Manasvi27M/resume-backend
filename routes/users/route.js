@@ -1,9 +1,15 @@
 import express from "express";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 import Users from "../../models/users.js";
+import cors from "cors";
 
-const router = express.Router();
-
+const router = express();
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+router.use(cors(corsOptions));
 // ─────────────────────────────────────────────
 // POST /api/auth/signup
 router.post("/signup", async (req, res) => {
@@ -52,7 +58,9 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password)
-    return res.status(400).json({ message: "Email and password are required." });
+    return res
+      .status(400)
+      .json({ message: "Email and password are required." });
 
   try {
     const user = await Users.findOne({ email });
