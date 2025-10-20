@@ -1,15 +1,9 @@
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Users from "../../models/users.js";
-import cors from "cors";
 
 const router = express();
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-router.use(cors(corsOptions));
+
 // ─────────────────────────────────────────────
 // POST /api/auth/signup
 router.post("/signup", async (req, res) => {

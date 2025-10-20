@@ -4,9 +4,18 @@ import userRoutes from "./routes/users/route.js";
 import userDetailRoutes from "./routes/users/[id]/route.js";
 import resumeRoutes from "./routes/resume/route.js";
 import resumeDetailRoutes from "./routes/resume/[id]/route.js";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-user-id"],
+};
+// app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));
+
 connectDB();
 app.use("/api", userRoutes);
 app.use("/api/user/:id", userDetailRoutes);
